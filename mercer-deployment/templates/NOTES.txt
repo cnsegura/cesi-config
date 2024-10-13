@@ -1,1 +1,1 @@
-kubectl exec --stdin --tty mqtt-client --namespace azure-iot-operations -- sh
+kubectl exec -it mqtt-client --namespace azure-iot-operations sh
