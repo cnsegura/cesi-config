@@ -8,5 +8,9 @@ spec:
   chart:
     spec:
       chart: ./mercer-deployment
+      sourceRef:
+        kind: GitRepository
+        name: flux-helm-aks
+        namespace: flux-system
   values:
     replicaCount: 1
