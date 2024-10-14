@@ -1,2 +1,4 @@
 mqttName: mqtt-client
-namespace: azure-iot-operations
+mqttTwo: mqtt-broker
+namespaceIot: azure-iot-operations
+namespaceCesi: cesi

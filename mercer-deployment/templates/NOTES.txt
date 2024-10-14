@@ -1,1 +1,1 @@
-kubectl exec -it mqtt-client --namespace azure-iot-operations sh
+kubectl exec -it mqtt-client --namespace cesi sh

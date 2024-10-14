@@ -2,14 +2,32 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: {{ .Values.mqttName }}
-  namespace: azure-iot-operations
+  # Namespace must match MQTT broker BrokerListener's namespace
+  # Otherwise use the long hostname: aio-broker.azure-iot-operations.svc.cluster.local
+  namespace: {{ .Values.namespaceCesi }}
 spec:
   # Use the "mqtt-client" service account which comes with default deployment
   # Otherwise create it with `kubectl create serviceaccount mqtt-client -n azure-iot-operations`
   serviceAccountName: mqtt-client
   containers:
+    # Mosquitto and mqttui on Alpine
   - image: cesicontainerregistry.azurecr.io/mqtt-client
     name: {{ .Values.mqttName }}
+    command: ["sh", "-c"]
+    args: ["sleep infinity"]
+  imagePullSecrets:
+  - name: regcredcesi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .Values.mqttTwo }}
+  namespace: {{ .Values.namespaceIot }}
+spec:
+  serviceAccountName: mqtt-broker
+  containers:
+  - image: cesicontainerregistry.azurecr.io/mymqtt-broker:v1
+    name: {{ .Values.mqttTwo }}
     command: ["sh", "-c"]
     args: ["sleep infinity"]
   imagePullSecrets:
