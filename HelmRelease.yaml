@@ -1,0 +1,12 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: flux-release
+  namespace: default
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: ./mercer-deployment
+  values:
+    replicaCount: 1
