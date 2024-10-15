@@ -1,0 +1,21 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: hello-arc
+  namespace: hello-arc
+  annotations:
+    clusterconfig.azure.com/use-managed-source: "true"
+spec:
+  interval: 5m
+  releaseName: hello-cesi
+  chart:
+    spec:
+      chart: ./mercer-deployment/
+  values:
+    image:
+      repository: azurearcjumpstart.azurecr.io/hello-arc-gitops
+      tag: latest
+    replicaCount: 1
+    env:
+      name: MESSAGE
+      value: Welcome to Azure Arc GitOps Demo!
